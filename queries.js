@@ -35,11 +35,11 @@ const getEmailByName = (request, response) => {
     })
 }
 const createUser = (request, response) => {
-    const {
-        name,
-        email
-    } = request.body
-    db.query('INSERT INTO assignement4.users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+    const id = parseInt(request.body.id)
+    const name = request.body.name
+    const email = request.body.email
+    console.log(request.body)
+    db.query('INSERT INTO assignement4.users (id, name, email) VALUES ($1, $2, $3)', [id, name, email], (error, results) => {
         if (error) {
             throw error
         }

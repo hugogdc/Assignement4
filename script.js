@@ -22,6 +22,31 @@ $('#getemail').click(function(){
   });
 });
 
+$('#insert').click(function(){
+    $("#show-users").fadeIn();
+    document.getElementById('show-users').innerHTML = '';
+    
+  $.ajax({
+    method: "POST",
+    url: 'http://localhost:3000/users',
+    data:{
+      id:document.getElementById("id").value,
+      name:document.getElementById("name").value,
+      email:document.getElementById("email").value
+    },
+    success: function(result){
+    var user = '';
+    console.log(result)
+
+    var mainContainer = document.getElementById("show-users");
+    var div = document.createElement('div');
+    div.classList.add('userrow');
+    div.innerHTML = 'Response: ' + result;
+    mainContainer.appendChild(div);
+}
+  });
+});
+
 $('#update').click(function(){
     $("#show-users").fadeIn();
     document.getElementById('show-users').innerHTML = '';
