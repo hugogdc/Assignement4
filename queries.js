@@ -23,6 +23,17 @@ const getUserById = (request, response) => {
         response.status(200).json(results.rows)
     })
 }
+const getEmailByName = (request, response) => {
+    const name = request.query.name;
+    console.log(name);
+    db.query('SELECT email FROM assignement4.users WHERE name = $1',[name], (error, results) => {
+        if (error) {
+            throw error
+        }
+        console.log(results.rows);
+        response.status(200).json(results.rows)
+    })
+}
 const createUser = (request, response) => {
     const {
         name,
@@ -36,11 +47,10 @@ const createUser = (request, response) => {
     })
 }
 const updateUser = (request, response) => {
-    const id = parseInt(request.params.id)
-    const {
-        name,
-        email
-    } = request.body
+    const id = parseInt(request.body.id)
+    const name = request.body.name
+    const email = request.body.email
+    console.log(request.body)
     db.query(
         'UPDATE assignement4.users SET name = $1, email = $2 WHERE id = $3',
         [name, email, id],
@@ -53,7 +63,7 @@ const updateUser = (request, response) => {
     )
 }
 const deleteUser = (request, response) => {
-    const id = parseInt(request.params.id)
+    const id = parseInt(request.body.id)
     db.query('DELETE FROM assignement4.users WHERE id = $1', [id], (error, results) => {
         if (error) {
             throw error
@@ -64,6 +74,7 @@ const deleteUser = (request, response) => {
 module.exports = {
     getUsers,
     getUserById,
+    getEmailByName,
     createUser,
     updateUser,
     deleteUser,

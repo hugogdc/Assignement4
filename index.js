@@ -13,8 +13,12 @@ app.use(
 app.get('/', (request, response) => {
     response.sendFile(__dirname + '/index.html')
 })
+app.get('/script.js', (request, response) => {
+    response.sendFile(__dirname + '/script.js')
+})
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
+app.get('/email/:name', db.getEmailByName)
 app.post('/users', db.createUser)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
