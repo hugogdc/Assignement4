@@ -43,7 +43,7 @@ const createUser = (request, response) => {
         if (error) {
             throw error
         }
-        response.status(201).send(`User added with ID: ${results.insertId}`)
+        response.status(201).send(`User added with: ${JSON.stringify(request.body)}`)
     })
 }
 const updateUser = (request, response) => {
